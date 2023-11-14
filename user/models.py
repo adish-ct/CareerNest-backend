@@ -10,8 +10,8 @@ class Employer(models.Model):
     employer_type = models.CharField(max_length=255, null=True, blank=True)
     employer_description = models.TextField(null=True, blank=True)
     employer_location = models.CharField(max_length=255, null=True, blank=True)
-    profile_image = models.ImageField(null=True, blank=True)
-    banner_image = models.ImageField(null=True, blank=True)
+    profile_image = models.ImageField(upload_to="employer/profile_images/" ,null=True, blank=True)
+    banner_image = models.ImageField(upload_to="employer/banner_images/" ,null=True, blank=True)
     rating = models.IntegerField(default=5, blank=True)
     is_verified = models.BooleanField(default=False)
     avarage_salary = models.IntegerField(default=500000, blank=True)
@@ -25,6 +25,13 @@ class Employer(models.Model):
     
 
 
-
+# class Candidate(models.Model):
+#     candidate_place = models.CharField(max_length=255, null=True, blank=True)
+#     candidate_city = models.CharField(max_length=255, null=True, blank=True)
+#     candidate_state = models.CharField(max_length=255, null=True, blank=True)
+#     phone = models.CharField(max_length=10, blank=True, null=True)
+#     profile_image = models.ImageField(upload_to="candidate/profile_images/", null=True, blank=True)
+#     banner_image = models.ImageField(upload_to="candidate/banner_images/", null=True, blank=True)
+    
     
 
