@@ -1,7 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import viewsets
-
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import CreateModelMixin
+from applications.accounts.models import User
+from applications.accounts.serializers.user_serializer import UserSerializer
 
 
 
@@ -10,5 +12,6 @@ class RegisterUserApiView(APIView):
         return Response({"message": "success"})        
     
 
-class UserRegistrationView(viewsets.GenericViewSet):
-    pass
+class UserRegisterAPIView(CreateModelMixin, GenericViewSet):
+    user = User.objects.all()
+    serializer_class = UserSerializer
