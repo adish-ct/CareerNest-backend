@@ -6,10 +6,14 @@ from applications.accounts.models import User, Role
 from applications.accounts.serializers.user_serializer import UserSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
 from rest_framework import status
+from rest_framework_simplejwt.views import TokenObtainPairView
+from applications.accounts.serializers.token_serializer import MyTokenObtainPairSerializer
+
 
 
 class RoleApiView(viewsets.GenericViewSet):
     queryset = Role.objects.all()
+
     serializer_class = RoleSerializer
 
     def list(self, request):
@@ -34,5 +38,9 @@ class UserRegisterAPIView(CreateModelMixin, viewsets.GenericViewSet):
     # perform_handled customize the behaviour when an object created. if we want to perform any additional operations
     def perform_create(self, serializer):
         serializer.save()
+
+
+class MyTokenObtainView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 

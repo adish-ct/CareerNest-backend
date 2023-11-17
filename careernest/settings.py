@@ -29,7 +29,6 @@ INSTALLED_APPS = [
 
     'applications.accounts.apps.AccountsConfig',
 
-
 ]
 
 MIDDLEWARE = [
@@ -123,6 +122,7 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "TOKEN_OBTAIN_SERIALIZER": "applications.accounts.serializers.token_serializer.MyTokenObtainPairSerializer",
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -130,6 +130,7 @@ AUTHENTICATION_BACKENDS = [
     'common.authentication_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
 
 
 CORS_ORIGIN_ALLOW_ALL = True
