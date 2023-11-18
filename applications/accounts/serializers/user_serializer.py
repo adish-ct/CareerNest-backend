@@ -1,6 +1,7 @@
 from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework  import serializers
 from applications.accounts.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserSerializer(ModelSerializer):
@@ -22,3 +23,29 @@ class UserSerializer(ModelSerializer):
             raise serializers.ValidationError("Role is required")
         return data
     
+    def create(self, validated_data):
+        # Extract the password from the validated data
+        password = validated_data.pop('password', None)
+
+        # Create the user object without saving it to the database
+        user = User(**validated_data)
+
+        # Set the password and save the user object
+        user.set_password(password)
+        user.save()
+
+        return user
+    
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        token['email'] = user.email
+        # providing user role into token for checking user is candidate or not.
+        token['role'] = user.role.role
+        token['is_staff'] = user.is_staff
+        token['is_superuser'] = user.is_superuser
+
+        return token

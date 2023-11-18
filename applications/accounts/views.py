@@ -7,7 +7,7 @@ from applications.accounts.serializers.user_serializer import UserSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
-from applications.accounts.serializers.token_serializer import MyTokenObtainPairSerializer
+from applications.accounts.serializers.user_serializer import MyTokenObtainPairSerializer
 
 
 
@@ -35,7 +35,6 @@ class UserRegisterAPIView(CreateModelMixin, viewsets.GenericViewSet):
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # perform_handled customize the behaviour when an object created. if we want to perform any additional operations
     def perform_create(self, serializer):
         serializer.save()
 

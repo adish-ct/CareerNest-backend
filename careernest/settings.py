@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     'applications.accounts.apps.AccountsConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -125,11 +124,10 @@ SIMPLE_JWT = {
     "TOKEN_OBTAIN_SERIALIZER": "applications.accounts.serializers.token_serializer.MyTokenObtainPairSerializer",
 }
 
-AUTHENTICATION_BACKENDS = [
-    # email authentication and you can check the file in the corresponding path
-    'common.authentication_backends.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
+# AUTHENTICATION_BACKENDS = [
+#     'common.authentication_backends.EmailBackend',
+#     'django.contrib.auth.backends.ModelBackend',
+# 
 
 
 
