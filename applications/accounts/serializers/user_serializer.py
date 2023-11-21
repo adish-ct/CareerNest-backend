@@ -2,6 +2,7 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from rest_framework  import serializers
 from applications.accounts.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from applications.accounts.models import Role
 
 
 class UserSerializer(ModelSerializer):
@@ -44,7 +45,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['email'] = user.email
         # providing user role into token for checking user is candidate or not.
-        token['role'] = user.role.role
+        token['role'] = None
+        if user.role:
+            try:
+                role_data = Role.objects.get(id=user.role)
+                token['role'] = role_data.role
+            except Exception as e:
+                print(e)
         token['is_staff'] = user.is_staff
         token['is_superuser'] = user.is_superuser
 

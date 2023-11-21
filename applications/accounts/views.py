@@ -25,10 +25,7 @@ class UserRegisterAPIView(CreateModelMixin, viewsets.GenericViewSet):
     user = User.objects.all()
     serializer_class = UserSerializer
 
-    def create(self, request, *args, **kwargs):
-        print(request.data)
-        role = request.data.get('role')
-        print(role)
+    def create(self, request, *args, **kwargs):        
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 

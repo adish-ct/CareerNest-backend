@@ -49,7 +49,7 @@ class Role(DateBaseModel):
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    phone = models.CharField(max_length=10, null=True, blank=True)
+    phone = models.CharField(max_length=12, null=True, blank=True)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True)
     is_approved = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
