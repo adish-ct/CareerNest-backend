@@ -48,7 +48,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = None
         if user.role:
             try:
-                role_data = Role.objects.get(id=user.role)
+                role_data = Role.objects.get(role=user.role)
                 token['role'] = role_data.role
             except Exception as e:
                 print(e)
