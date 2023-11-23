@@ -63,13 +63,9 @@ WSGI_APPLICATION = 'careernest.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'careernest', 
-        'USER': 'postgres',
-        'PASSWORD': 'adishct',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
