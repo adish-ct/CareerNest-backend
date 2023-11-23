@@ -2,6 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from applications.accounts.views import MyTokenObtainView
+from rest_framework import routers
+from applications.jobs.views import JobsApiView
+
+router = routers.DefaultRouter()
+
+router.register('jobs', JobsApiView, basename='jobs')
 
 
 urlpatterns = [
@@ -9,5 +15,6 @@ urlpatterns = [
     path('accounts/login/', MyTokenObtainView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('accounts/', include('applications.accounts.urls')),
-    path('jobs/', include('applications.jobs.urls')),
+    path('', include(router.urls)),
+
 ]
