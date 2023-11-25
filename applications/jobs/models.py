@@ -9,8 +9,8 @@ class Jobs(DateBaseModel):
     job_role = models.CharField(max_length=255, blank=True, null=True)
     job_location = models.CharField(max_length=255, blank=True, null=True)
     job_ctc = models.IntegerField(null=True, blank=True)
-    experience = models.IntegerField(default=0, blank=True)
     job_type = models.CharField(max_length=255, null=True, blank=True)
+    experience = models.IntegerField(default=0, blank=True)
     work_type = models.CharField(max_length=255, null=True, blank=True)
     vaccancy = models.IntegerField(default=1, blank=True)
     skills = models.CharField(max_length=300, blank=True, null=True)
@@ -22,5 +22,5 @@ class Jobs(DateBaseModel):
     department = models.CharField(max_length=255, blank=True)
     highlight = models.TextField(blank=True, null=True)
 
-    def __str__(self) -> str:
-        return self.job_role
+    # def __str__(self) -> str:
+    #     return self.job_role

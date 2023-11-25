@@ -11,4 +11,10 @@ class JobsApiView(viewsets.ModelViewSet):
     queryset = Jobs.objects.all()
     serializer_class = JobSerializer
 
+    # def create(self, request, *args, **kwargs):
+    #     print("----------------------")
+    #     print(request.data)
+    #     print("----------------------")
+    #     return Response({"msg": "success"})
+
 
