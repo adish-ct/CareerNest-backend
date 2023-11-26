@@ -5,9 +5,12 @@ from applications.accounts.views import MyTokenObtainView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView
 
+
 router = routers.DefaultRouter()
 
+
 router.register('jobs', JobsApiView, basename='jobs')
+
 
 
 urlpatterns = [

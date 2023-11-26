@@ -1,9 +1,10 @@
 from rest_framework import routers
 from django.urls import path
-from applications.accounts.views import RoleApiView, UserRegisterAPIView
+from applications.accounts.views import RoleApiView, UserAPIView
 
 urlpatterns = [
     path('', RoleApiView.as_view({'get': 'list'})),
-    path('register/', UserRegisterAPIView.as_view({'post': 'create'})),
+    path('register/', UserAPIView.as_view({'post': 'create'})),
+    path('get-user/<int:pk>/', UserAPIView.as_view({'get': 'retrieve'})),
 ]
 

@@ -21,9 +21,12 @@ class RoleApiView(viewsets.GenericViewSet):
         serializer = self.get_serializer(roles, many=True)
         return Response(serializer.data)
     
-class UserRegisterAPIView(CreateModelMixin, viewsets.GenericViewSet):
-    user = User.objects.all()
+class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = UserSerializer
+
+    # using retrive method we have to override get_query() method
+    def get_queryset(self):
+        return User.objects.all()
 
     def create(self, request, *args, **kwargs):        
         serializer = self.get_serializer(data=request.data)
@@ -34,6 +37,15 @@ class UserRegisterAPIView(CreateModelMixin, viewsets.GenericViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+    # retrive method should use pk for retrieve a specific user rather than using id.
+    def retrieve(self, request, pk, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        print("-------------------------------")
+        print(serializer.data)
+        print("-------------------------------")
+        return Response(serializer.data)
 
 
 class MyTokenObtainView(TokenObtainPairView):
