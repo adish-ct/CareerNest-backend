@@ -42,9 +42,7 @@ class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
     def retrieve(self, request, pk, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        print("-------------------------------")
         print(serializer.data)
-        print("-------------------------------")
         return Response(serializer.data)
 
 

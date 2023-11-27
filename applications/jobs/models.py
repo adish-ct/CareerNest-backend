@@ -6,6 +6,7 @@ from applications.accounts.models import User
 
 class Jobs(DateBaseModel):
     employer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    organization = models.CharField(max_length=255, blank=True, null=True)
     job_role = models.CharField(max_length=255, blank=True, null=True)
     job_location = models.CharField(max_length=255, blank=True, null=True)
     job_ctc = models.IntegerField(null=True, blank=True)
@@ -22,5 +23,5 @@ class Jobs(DateBaseModel):
     department = models.CharField(max_length=255, blank=True)
     highlight = models.TextField(blank=True, null=True)
 
-    # def __str__(self) -> str:
-    #     return self.job_role
+    def __str__(self) -> str:
+        return f'{self.job_role} - {self.employer.username}'
