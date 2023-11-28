@@ -3,4 +3,7 @@ from .models import Jobs
 
 # Register your models here.
 
-admin.site.register(Jobs)
+class JobAdmin(admin.ModelAdmin):
+    list_display = ['id', 'job_role']
+
+admin.site.register(Jobs, JobAdmin)
