@@ -1,9 +1,10 @@
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
 from applications.accounts.models import User, Role, Profile
-from applications.accounts.serializers.user_serializer import UserSerializer, MyTokenObtainPairSerializer
+from applications.accounts.serializers.user_serializer import UserSerializer, MyTokenObtainPairSerializer, CustomUserSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -22,12 +23,16 @@ class RoleApiView(viewsets.GenericViewSet):
         serializer = self.get_serializer(roles, many=True)
         return Response(serializer.data)
     
-class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
+class UserAPIView(CreateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = UserSerializer
 
-    # using retrive method we have to override get_query() method
     def get_queryset(self):
         return User.objects.all()
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return CustomUserSerializer
+        return UserSerializer
 
     def create(self, request, *args, **kwargs):        
         serializer = self.get_serializer(data=request.data)
@@ -37,15 +42,13 @@ class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
 
     def perform_create(self, serializer):
         user = serializer.save()
-        # creating an object of profile for the user
+        # Creating an object of profile for the user
         Profile.objects.create(user=user)
         
-
-    # retrive method should use pk for retrieve a specific user rather than using id.
     def retrieve(self, request, pk, *args, **kwargs):
+        # Use get_object() method to retrieve the instance
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        print(serializer.data)
         return Response(serializer.data)
 
 
