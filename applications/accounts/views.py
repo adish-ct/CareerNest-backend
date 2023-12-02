@@ -8,6 +8,7 @@ from applications.accounts.serializers.role_serializer import RoleSerializer
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
 from applications.accounts.serializers.profile_serializer import ProfileSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -53,8 +54,12 @@ class MyTokenObtainView(TokenObtainPairView):
 
 
 class ProfileApiView(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # returning authenticated user's profile object
+        return Profile.objects.filter(user=self.request.user)
     
 
 
