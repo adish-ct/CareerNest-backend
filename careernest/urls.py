@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
+from django.conf.urls.static import static
+from careernest import settings
 
 
 router = routers.DefaultRouter()
@@ -22,3 +24,6 @@ urlpatterns = [
     path('accounts/', include('applications.accounts.urls')),
     path('', include(router.urls)),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
