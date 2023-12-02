@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from applications.accounts.views import MyTokenObtainView
+from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
 
@@ -11,6 +11,7 @@ router = routers.DefaultRouter()
 
 router.register('jobs', JobsApiView, basename='jobs')
 router.register('employer/jobs', EmployerJobsApiView, basename='employer_jobs')
+router.register('profile', ProfileApiView, basename="profile")
 
 
 

@@ -67,9 +67,11 @@ class Profile(DateBaseModel, models.Model):
     about = models.TextField(null=True, blank=True)
     rating = models.IntegerField(default=5, blank=True)
     phone = models.CharField(max_length=10, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
     place = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     state = models.CharField(max_length=255, null=True, blank=True)
+    zip_code = models.CharField(max_length=6, blank=True, null=True)
     profile_image = models.ImageField(upload_to="profile_images/", null=True, blank=True)
     banner_image = models.ImageField(upload_to="banner_images/", null=True, blank=True)
     organization = models.CharField(max_length=25, null=True, blank=True)
@@ -80,7 +82,7 @@ class Profile(DateBaseModel, models.Model):
     candidate_following = models.IntegerField(default=0, null=True)
     candidate_designation = models.CharField(max_length=255, null=True, blank=True)
     candidate_date_of_birth = models.DateField(null=True, blank=True)
-    candidate_resume = models.FileField(upload_to="candidate/resumes/", null=True, blank=True) 
+    candidate_resume = models.FileField(upload_to="resumes/", null=True, blank=True) 
 
     def __str__(self) -> str:
         return self.user.username

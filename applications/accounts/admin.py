@@ -9,7 +9,8 @@ class RoleAdminManger(admin.ModelAdmin):
     list_display = ['id', 'role']
 
 class ProfileAdminManger(admin.ModelAdmin):
-    list_display = ['id', 'user', 'candidate_designation', '']
+    list_display = ['id', 'user', 'candidate_designation']
 
 admin.site.register(User, UserAdminManager)
 admin.site.register(Role, RoleAdminManger)
+admin.site.register(Profile, ProfileAdminManger)

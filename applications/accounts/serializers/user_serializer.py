@@ -1,8 +1,7 @@
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from rest_framework  import serializers
-from applications.accounts.models import User
+from applications.accounts.models import User, Role
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from applications.accounts.models import Role
 
 
 class UserSerializer(ModelSerializer):

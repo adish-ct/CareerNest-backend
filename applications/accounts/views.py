@@ -2,12 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.mixins import CreateModelMixin
-from applications.accounts.models import User, Role
-from applications.accounts.serializers.user_serializer import UserSerializer
+from applications.accounts.models import User, Role, Profile
+from applications.accounts.serializers.user_serializer import UserSerializer, MyTokenObtainPairSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
-from applications.accounts.serializers.user_serializer import MyTokenObtainPairSerializer
+from applications.accounts.serializers.profile_serializer import ProfileSerializer
 
 
 
@@ -31,12 +31,14 @@ class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):        
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def perform_create(self, serializer):
-        serializer.save()
+        user = serializer.save()
+        # creating an object of profile for the user
+        Profile.objects.create(user=user)
+        
 
     # retrive method should use pk for retrieve a specific user rather than using id.
     def retrieve(self, request, pk, *args, **kwargs):
@@ -48,5 +50,11 @@ class UserAPIView(CreateModelMixin, viewsets.GenericViewSet):
 
 class MyTokenObtainView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class ProfileApiView(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    
 
 
