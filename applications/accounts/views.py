@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
 from applications.accounts.models import User, Role, Profile
 from applications.accounts.serializers.user_serializer import UserSerializer, MyTokenObtainPairSerializer, CustomUserSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
@@ -23,14 +23,14 @@ class RoleApiView(viewsets.GenericViewSet):
         serializer = self.get_serializer(roles, many=True)
         return Response(serializer.data)
     
-class UserAPIView(CreateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
+class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewsets.GenericViewSet):
     serializer_class = UserSerializer
 
     def get_queryset(self):
         return User.objects.all()
     
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action == 'retrieve' or self.action == 'update':
             return CustomUserSerializer
         return UserSerializer
 
@@ -50,7 +50,19 @@ class UserAPIView(CreateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet)
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+    
+    def update(self, request, *args, **kwargs):
+        print("------------------")
+        print(request)
+        print("------------------")
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
+    def perform_update(self, serializer):
+        serializer.save()
 
 class MyTokenObtainView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
