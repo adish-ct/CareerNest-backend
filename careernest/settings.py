@@ -121,16 +121,10 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=40),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "TOKEN_OBTAIN_SERIALIZER": "applications.accounts.serializers.token_serializer.MyTokenObtainPairSerializer",
 }
-
-# AUTHENTICATION_BACKENDS = [
-#     'common.authentication_backends.EmailBackend',
-#     'django.contrib.auth.backends.ModelBackend',
-# 
-
 
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -138,10 +132,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 # static settings
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 else:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_ROOT = os.path.join(BASE_DIR, 'assets')

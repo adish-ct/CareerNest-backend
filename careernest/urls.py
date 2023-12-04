@@ -6,6 +6,7 @@ from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
 from django.conf.urls.static import static
 from careernest import settings
+from django.conf import settings
 
 
 router = routers.DefaultRouter()

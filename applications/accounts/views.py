@@ -52,9 +52,6 @@ class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewse
         return Response(serializer.data)
     
     def update(self, request, *args, **kwargs):
-        print("------------------")
-        print(request)
-        print("------------------")
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
