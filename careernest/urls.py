@@ -10,12 +10,9 @@ from careernest import settings
 
 router = routers.DefaultRouter()
 
-
 router.register('jobs', JobsApiView, basename='jobs')
 router.register('employer/jobs', EmployerJobsApiView, basename='employer_jobs')
 router.register('profile', ProfileApiView, basename="profile")
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

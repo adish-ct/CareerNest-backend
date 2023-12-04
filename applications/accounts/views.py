@@ -76,5 +76,15 @@ class ProfileApiView(viewsets.ModelViewSet):
         # returning authenticated user's profile object
         return Profile.objects.filter(user=self.request.user)
     
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
 
 

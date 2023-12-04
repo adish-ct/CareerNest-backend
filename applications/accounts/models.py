@@ -67,7 +67,7 @@ class Profile(DateBaseModel, models.Model):
     additional_email = models.EmailField(blank=True, null=True)
     about = models.TextField(null=True, blank=True)
     rating = models.IntegerField(default=5, blank=True)
-    phone = models.CharField(max_length=10, null=True, blank=True)
+    mobile = models.CharField(max_length=10, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     place = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
