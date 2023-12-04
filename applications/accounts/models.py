@@ -64,6 +64,7 @@ class User(AbstractUser):
 
 class Profile(DateBaseModel, models.Model):
     user = models.OneToOneField(User, blank=True, on_delete=models.CASCADE)
+    additional_email = models.EmailField(blank=True, null=True)
     about = models.TextField(null=True, blank=True)
     rating = models.IntegerField(default=5, blank=True)
     phone = models.CharField(max_length=10, null=True, blank=True)
