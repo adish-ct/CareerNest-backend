@@ -83,6 +83,7 @@ class Profile(DateBaseModel, models.Model):
     candidate_designation = models.CharField(max_length=255, null=True, blank=True)
     candidate_date_of_birth = models.DateField(null=True, blank=True)
     candidate_resume = models.FileField(upload_to="resumes/", null=True, blank=True) 
+    candidate_expecting_salary = models.IntegerField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.user.username
