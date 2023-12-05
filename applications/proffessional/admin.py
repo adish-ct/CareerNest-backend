@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Experience
 
-# Register your models here.
+
+class ExperienceAdminManager(admin.ModelAdmin):
+    list_display = ['id']
+
+
+admin.site.register(Experience, ExperienceAdminManager)

@@ -15,7 +15,6 @@ from rest_framework.permissions import IsAuthenticated
 
 class RoleApiView(viewsets.GenericViewSet):
     queryset = Role.objects.all()
-
     serializer_class = RoleSerializer
 
     def list(self, request):

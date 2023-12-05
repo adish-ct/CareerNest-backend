@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
+from applications.proffessional.views import ExperienceApiView
 from django.conf.urls.static import static
 from careernest import settings
 from django.conf import settings
@@ -14,6 +15,7 @@ router = routers.DefaultRouter()
 router.register('jobs', JobsApiView, basename='jobs')
 router.register('employer/jobs', EmployerJobsApiView, basename='employer_jobs')
 router.register('profile', ProfileApiView, basename="profile")
+router.register('experience', ExperienceApiView, basename="experience")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
