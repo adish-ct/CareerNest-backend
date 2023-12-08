@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from ..models import Education
-from django.core.exceptions import ValidationError
+from ..validators.custom_validators import CustomDateValidator
 
 
 
@@ -9,6 +9,10 @@ class EducationSerializer(ModelSerializer):
     class Meta:
         model = Education
         fields = '__all__'
+        extra_kwargs = {
+            'start_date': {'validators': [CustomDateValidator()],},
+            'end_date': {'validators': [CustomDateValidator()],}
+        }
 
     def validate(self, data):
         start_date = data.get('start_date')

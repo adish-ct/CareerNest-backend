@@ -43,5 +43,9 @@ class Education(DateBaseModel):
     def __str__(self) -> str:
         return f'{self.user.username} - {self.stream}'
     
+
+
+
+    
     
 
