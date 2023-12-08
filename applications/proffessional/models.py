@@ -23,6 +23,25 @@ class Experience(DateBaseModel):
     def __str__(self) -> str:
         return f'{self.user} + {self.job_role}'
     
+
+
+class Education(DateBaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    stream = models.CharField(max_length=255, null=True, blank=True)
+    organization = models.CharField(max_length=255, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    state = models.CharField(max_length=255, null=True, blank=True)
+    cource_type = models.CharField(max_length=255, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    duration = models.CharField(max_length=255, null=True, blank=True)
+    currently_studying = models.BooleanField(default=False, blank=True)
+    score = models.IntegerField(default=5, blank=True)
+    documents = models.FileField(upload_to='documents/', null=True, blank=True)
+    
+    
+    def __str__(self) -> str:
+        return f'{self.user.username} - {self.stream}'
     
     
 
