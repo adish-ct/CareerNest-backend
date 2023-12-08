@@ -15,7 +15,6 @@ class ExperienceApiView(ModelViewSet):
     
 
 class EducationApiView(ModelViewSet):
-    queryset = Education.objects.all()
     serializer_class = EducationSerializer
     permission_classes = [IsAuthenticated]
 

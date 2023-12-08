@@ -31,7 +31,7 @@ class Education(DateBaseModel):
     organization = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=255, null=True, blank=True)
     state = models.CharField(max_length=255, null=True, blank=True)
-    cource_type = models.CharField(max_length=255, null=True, blank=True)
+    course_type = models.CharField(max_length=255, null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     duration = models.CharField(max_length=255, null=True, blank=True)

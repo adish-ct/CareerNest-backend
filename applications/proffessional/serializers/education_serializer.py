@@ -11,8 +11,8 @@ class EducationSerializer(ModelSerializer):
         fields = '__all__'
 
     def validate(self, data):
-        start_date = Education.objects.get('start_date')
-        end_date = Education.objects.get('end_date')
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
 
         if start_date and end_date and start_date > end_date:
             raise serializers.ValidationError("Start date must be less than end date")
