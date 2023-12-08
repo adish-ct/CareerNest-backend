@@ -45,6 +45,27 @@ class Education(DateBaseModel):
     
 
 
+class Project(DateBaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    project_name = models.CharField(max_length=255, null=True, blank=True)
+    category = models.CharField(max_length=300, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    currently_working = models.BooleanField(default=False, blank=True)
+    collab_project = models.BooleanField(default=False, blank=True)
+    git_link = models.CharField(null=True, blank=True)
+    website_link = models.CharField(null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+    challenges = models.TextField(null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.user.username} - {self.project_name}'
+    
+
+    
+    
+
+
 
     
     
