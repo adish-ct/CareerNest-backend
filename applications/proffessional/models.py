@@ -56,7 +56,7 @@ class Project(DateBaseModel):
     git_link = models.CharField(null=True, blank=True)
     website_link = models.CharField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
-    challenges = models.TextField(null=True, blank=True)
+    features = models.TextField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.user.username} - {self.project_name}'
