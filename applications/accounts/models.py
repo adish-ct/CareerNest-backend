@@ -48,6 +48,7 @@ class Role(DateBaseModel):
 
 
 class User(AbstractUser):
+    username    = models.CharField(max_length=225, unique=False, null=True)
     email       = models.EmailField(unique=True, max_length=255)
     phone       = models.CharField(max_length=12, null=True, blank=True)
     role        = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True)
