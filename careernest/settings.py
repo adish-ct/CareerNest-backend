@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'applications.accounts.apps.AccountsConfig',
     'applications.jobs.apps.JobsConfig',
     'applications.proffessional.apps.ProffessionalConfig',
+    'applications.application.apps.ApplicationConfig',
 ]
 
 MIDDLEWARE = [
