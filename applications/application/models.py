@@ -10,7 +10,7 @@ class Application(DateBaseModel):
     status = models.CharField(max_length=25, null=True, blank=True)
     is_pending = models.BooleanField(default=True, blank=True)
     is_accept = models.BooleanField(default=False, blank=True)
-    is_reject = models.BooleanField(default=True, blank=True)
+    is_reject = models.BooleanField(default=False, blank=True)
 
     def __str__(self) -> str:
         return f'{self.user.username} - {self.job.job_role}'

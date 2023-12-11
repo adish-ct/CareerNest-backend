@@ -5,6 +5,7 @@ from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
 from applications.proffessional.views import ExperienceApiView, EducationApiView, ProjectApiView
+from applications.application.views import ApplicationApiView
 from django.conf.urls.static import static
 from careernest import settings
 from django.conf import settings
@@ -12,12 +13,18 @@ from django.conf import settings
 
 router = routers.DefaultRouter()
 
+# job apis
 router.register('jobs', JobsApiView, basename='jobs')
 router.register('employer/jobs', EmployerJobsApiView, basename='employer_jobs')
+
+# profile apis
 router.register('profile', ProfileApiView, basename="profile")
 router.register('experience', ExperienceApiView, basename="experience")
 router.register('education', EducationApiView, basename="education")
 router.register('project', ProjectApiView, basename="project")
+
+# home apis
+router.register('application', ApplicationApiView, basename="appplications")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

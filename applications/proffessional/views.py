@@ -1,5 +1,3 @@
-from rest_framework.parsers import FileUploadParser
-from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .serializers.experience_serializer import ExpenceSerializer
