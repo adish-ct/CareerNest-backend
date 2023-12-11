@@ -2,12 +2,14 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework  import serializers
 from applications.accounts.models import User, Role
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .profile_serializer import ProfileSerializer
 
 
 class UserSerializer(ModelSerializer):
+    profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'role')
+        fields = ('id', 'username', 'email', 'password', 'role', 'profile')
         extra_kwargs = {'password': {"write_only":True}}
 
     def validate_email(self, value):

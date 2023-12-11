@@ -15,4 +15,7 @@ class ApplicationApiView(ModelViewSet):
         if job_id is not None and role == 'Candidate':
             return Application.objects.filter(user=user, job=job_id)
         else:
-            return Application.objects.filter(user=user, job=job_id)
+            applications = Application.objects.filter(job_id=job_id)
+            applications = applications.select_related('user__profile')
+            return applications
+        
