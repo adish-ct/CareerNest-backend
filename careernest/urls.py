@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
-from applications.proffessional.views import ExperienceApiView, EducationApiView, ProjectApiView
+from applications.proffessional.views import ExperienceApiView, EducationApiView, ProjectApiView, SkillsApiView
 from applications.application.views import ApplicationApiView
 from django.conf.urls.static import static
 from careernest import settings
@@ -22,9 +22,12 @@ router.register('profile', ProfileApiView, basename="profile")
 router.register('experience', ExperienceApiView, basename="experience")
 router.register('education', EducationApiView, basename="education")
 router.register('project', ProjectApiView, basename="project")
+router.register('skills', SkillsApiView, basename="skills")
 
 # home apis
 router.register('application', ApplicationApiView, basename="appplications")
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

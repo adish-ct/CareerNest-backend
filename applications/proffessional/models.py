@@ -62,7 +62,16 @@ class Project(DateBaseModel):
         return f'{self.user.username} - {self.project_name}'
     
 
-    
+class Skill(DateBaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    skiill = models.CharField(max_length=50, null=True, blank=True)
+    rating = models.CharField(max_length=10, blank=True, null=True)
+    years_of_experience = models.CharField(max_length=5, blank=True, null=True)
+    organization = models.CharField(max_length=155, null=True, blank=True)
+    version = models.CharField(max_length=10, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.user.username} - {self.skiill}'
     
 
 

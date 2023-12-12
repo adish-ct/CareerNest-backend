@@ -7,5 +7,5 @@ class ApplicationSerializer(ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = Application
-        fields = ['user', 'job', 'status', 'is_pending', 'is_accept', 'is_reject']
+        fields = ['id', 'user', 'job', 'status', 'is_pending', 'is_accept', 'is_reject']
         

@@ -45,8 +45,6 @@ class Role(DateBaseModel):
     def __str__(self) -> str:
         return self.role
 
-
-
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
     phone = models.CharField(max_length=12, null=True, blank=True)
@@ -81,10 +79,13 @@ class Profile(DateBaseModel, models.Model):
     employer_avarage_salary = models.IntegerField(default=500000, blank=True)
     employer_head_quarters = models.CharField(blank=True, null=True)
     candidate_following = models.IntegerField(default=0, null=True)
+    candidate_experience_year = models.IntegerField(default=0, blank=True)
+    candidate_experience_month = models.IntegerField(default=0, blank=True)
     candidate_designation = models.CharField(max_length=255, null=True, blank=True)
     candidate_date_of_birth = models.DateField(null=True, blank=True)
     candidate_resume = models.FileField(upload_to="resumes/", null=True, blank=True) 
     candidate_expecting_salary = models.IntegerField(null=True, blank=True)
+    candidate_skills = models.CharField(max_length=150, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.user.username
