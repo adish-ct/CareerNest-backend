@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin
 from applications.accounts.models import User, Role, Profile
 from applications.accounts.serializers.user_serializer import UserSerializer, MyTokenObtainPairSerializer, CustomUserSerializer
 from applications.accounts.serializers.role_serializer import RoleSerializer
@@ -22,10 +22,15 @@ class RoleApiView(viewsets.GenericViewSet):
         serializer = self.get_serializer(roles, many=True)
         return Response(serializer.data)
     
-class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewsets.GenericViewSet):
+class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewsets.GenericViewSet, ListModelMixin):
     serializer_class = UserSerializer
 
     def get_queryset(self):
+        print("--------------------")
+        role = self.request.query_params.get('role')
+        print("--------------", role)
+        if role:
+            return User.objects.filter(role__role=role)
         return User.objects.all()
     
     def get_serializer_class(self):

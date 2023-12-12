@@ -42,7 +42,7 @@ class ApplicationApiView(ModelViewSet):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_401_UNAUTHORIZED)
 
-# need to override get_object() method
+        # need to override get_object() method
         partial = kwargs.pop('partial', True)
         instance = Application.objects.get(id=self.kwargs.get('pk'))
         serializer = self.get_serializer(instance, data=request.data, partial=partial)

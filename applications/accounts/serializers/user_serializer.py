@@ -9,7 +9,7 @@ class UserSerializer(ModelSerializer):
     profile = ProfileSerializer()
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'role', 'profile')
+        fields = ('id', 'username', 'email', 'password', 'role', 'profile', 'is_active', 'first_name', 'last_name', 'phone')
         extra_kwargs = {'password': {"write_only":True}}
 
     def validate_email(self, value):
