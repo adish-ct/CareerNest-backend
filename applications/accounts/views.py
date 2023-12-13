@@ -26,11 +26,9 @@ class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewse
     serializer_class = UserSerializer
 
     def get_queryset(self):
-        print("--------------------")
         role = self.request.query_params.get('role')
-        print("--------------", role)
         if role:
-            return User.objects.filter(role__role=role)
+            return User.objects.filter(role__role=role).order_by('id')
         return User.objects.all()
     
     def get_serializer_class(self):
@@ -56,6 +54,10 @@ class UserAPIView(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, viewse
         return Response(serializer.data)
     
     def update(self, request, *args, **kwargs):
+        print("------------------------------")
+        print(self.request.data)
+        print("------------------------------")
+
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
