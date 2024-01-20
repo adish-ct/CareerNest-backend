@@ -5,11 +5,10 @@ from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
 from applications.proffessional.views import ExperienceApiView, EducationApiView, ProjectApiView, SkillsApiView
-from applications.application.views import ApplicationApiView
+from applications.application.views import ApplicationApiView, EmployerApplicationApiView
 from django.conf.urls.static import static
 from careernest import settings
 from django.conf import settings
-
 
 router = routers.DefaultRouter()
 
@@ -25,15 +24,15 @@ router.register('project', ProjectApiView, basename="project")
 router.register('skills', SkillsApiView, basename="skills")
 
 # home apis
-router.register('application', ApplicationApiView, basename="appplications")
-
-
+router.register('application', ApplicationApiView, basename="applications")
+router.register('employer/application', EmployerApplicationApiView, basename="employer_applications")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', MyTokenObtainView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('accounts/', include('applications.accounts.urls')),
+    path('api-auth/', include('drf_social_oauth2.urls', namespace='drf')),
     path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -2,17 +2,18 @@
 from pathlib import Path
 from datetime import timedelta
 import os
+from decouple import config
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-au5vn-g9dxzj_u&8b0dh5ca805qgtf@v&22k9eu9d^cgzch++u'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -28,12 +29,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'oauth2_provider',
-    'social_django',
+    'drf_social_oauth2',
 
     'applications.accounts.apps.AccountsConfig',
     'applications.jobs.apps.JobsConfig',
     'applications.proffessional.apps.ProffessionalConfig',
     'applications.application.apps.ApplicationConfig',
+    'applications.recruiter.apps.RecuiterConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,8 +143,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1035567764519-brgpvi47e8chcfossjuda94r4h9oihvq.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 
 SIMPLE_JWT = {
@@ -167,4 +169,13 @@ else:
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# mail sending
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
 

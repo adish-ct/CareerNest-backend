@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self._create_user(email, password, **extra_fields)
-    
+
 
 class Role(DateBaseModel):
     role = models.CharField(default="CANDIDATE", blank=True, null=True, unique=True)
@@ -45,10 +45,13 @@ class Role(DateBaseModel):
     def __str__(self) -> str:
         return self.role
 
+
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
     phone = models.CharField(max_length=12, null=True, blank=True)
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    token = models.CharField(max_length=12, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -59,6 +62,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 class Profile(DateBaseModel, models.Model):
     user = models.OneToOneField(User, blank=True, on_delete=models.CASCADE)
@@ -83,7 +87,7 @@ class Profile(DateBaseModel, models.Model):
     candidate_experience_month = models.IntegerField(default=0, blank=True)
     candidate_designation = models.CharField(max_length=255, null=True, blank=True)
     candidate_date_of_birth = models.DateField(null=True, blank=True)
-    candidate_resume = models.FileField(upload_to="resumes/", null=True, blank=True) 
+    candidate_resume = models.FileField(upload_to="resumes/", null=True, blank=True)
     candidate_expecting_salary = models.IntegerField(null=True, blank=True)
     candidate_skills = models.CharField(max_length=150, null=True, blank=True)
 

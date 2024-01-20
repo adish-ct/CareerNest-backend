@@ -2,6 +2,7 @@ from django.db import models
 from common.base_models import DateBaseModel
 from applications.accounts.models import User
 
+
 # Create your models here.
 
 class Jobs(DateBaseModel):
