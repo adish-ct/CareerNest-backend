@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 from applications.accounts.views import MyTokenObtainView, ProfileApiView
 from rest_framework import routers
 from applications.jobs.views import JobsApiView, EmployerJobsApiView
@@ -26,6 +26,9 @@ router.register('skills', SkillsApiView, basename="skills")
 # home apis
 router.register('application', ApplicationApiView, basename="applications")
 router.register('employer/application', EmployerApplicationApiView, basename="employer_applications")
+
+# recruiter apis
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
