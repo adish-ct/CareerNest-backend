@@ -7,6 +7,7 @@ from applications.jobs.views import JobsApiView, EmployerJobsApiView
 from applications.proffessional.views import ExperienceApiView, EducationApiView, ProjectApiView, SkillsApiView
 from applications.application.views import ApplicationApiView, EmployerApplicationApiView
 from django.conf.urls.static import static
+from applications.recruiter.views import RecruiterUpdateApiView
 from careernest import settings
 from django.conf import settings
 
@@ -28,7 +29,7 @@ router.register('application', ApplicationApiView, basename="applications")
 router.register('employer/application', EmployerApplicationApiView, basename="employer_applications")
 
 # recruiter apis
-
+router.register('recruiter-update', RecruiterUpdateApiView, basename='recruiter_update')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
