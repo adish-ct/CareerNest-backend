@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'oauth2_provider',
     'drf_social_oauth2',
+    'cloudinary_storage',
+    'cloudinary',
 
     'applications.accounts.apps.AccountsConfig',
     'applications.jobs.apps.JobsConfig',
@@ -141,6 +143,13 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
 ]
+
+# Cloud Storage
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
 
 # Google configuration
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
